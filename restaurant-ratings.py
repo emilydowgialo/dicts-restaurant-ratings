@@ -8,34 +8,40 @@ import sys
 restaurants_info={}
 sorted_scores=[]
 
-file_scores = open("scores.txt")
+ratings_file = open("scores.txt")
 
-for scores in file_scores:
+for line in ratings_file:
 	#push all the elements into our list 
 	#remove the \n
-	scores = scores.rstrip()
-	sorted_scores.append(scores)
+	line = line.rstrip()
+	
+	info_pair=line.split(":")
 
-# sorting restaurant names alphabetically
-sorted_scores=sorted(sorted_scores)
-
-for entry in sorted_scores:
-	info_pair = entry.split(",")
-
-
-	for restaurant in info_pair:
-		#len(restaurant)
-		#we need to search the string and find ':'
-		#and then split the string at the ':' creating two variables
-		if ":" in restaurant:
-			index_number = restaurant.index(":")
+	restaurant_name = info_pair[0]
+	restaurant_rating = int(info_pair[1])
+	restaurants_info[restaurant_name]=restaurant_rating
 			
-			restaurant_name = restaurant[:index_number]
-			restaurant_rating = restaurant[index_number+1:]
+#sorting the keys to create an alphabetical list	
+sorted_keys = sorted(restaurants_info.keys())
+#walk through the list using the key value and print out the message
+for key in sorted_keys:
+	print key, "is rated at", restaurants_info[key] 
 
-			
-			print restaurant_name, "is rated at", restaurant_rating
-			#print restaurant_rating
-			#restaurants_output[restaurant_name] = restaurant_rating
+#
+# for i, number in restaurants_info.items():
+# 	print "%s is rated at %d"%(i,number)
 
-#print(restaurants_output)
+
+# ######################################################################
+# #for further study
+
+user_restaurant = raw_input("Please enter a restaurant name: ")
+user_rating = raw_input("Please enter a restaurant rating that is 1-5: ")
+
+restaurants_info[user_restaurant]=user_rating
+
+#sorting the keys to create an alphabetical list	
+sorted_keys = sorted(restaurants_info.keys())
+#walk through the list using the key value and print out the message
+for key in sorted_keys:
+	print key, "is rated at", restaurants_info[key] 
