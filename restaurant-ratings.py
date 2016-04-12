@@ -1,8 +1,11 @@
 """
+Returns restaurant name and rating in one formatted line
 
 """
-scores={}
-restaurants_output={}
+import sys
+
+
+restaurants_info={}
 sorted_scores=[]
 
 file_scores = open("scores.txt")
@@ -13,12 +16,11 @@ for scores in file_scores:
 	scores = scores.rstrip()
 	sorted_scores.append(scores)
 
+# sorting restaurant names alphabetically
 sorted_scores=sorted(sorted_scores)
-print(sorted_scores)
 
 for entry in sorted_scores:
 	info_pair = entry.split(",")
-	#print(info_pair)
 
 
 	for restaurant in info_pair:
